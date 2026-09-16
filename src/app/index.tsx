@@ -1,13 +1,28 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Platform } from 'react-native';
 import LabelInput from '@/components/labelInput';
 
 export default function Index() {
   const [nilai1, setNilai1] = useState('');
   const [nilai2, setNilai2] = useState('');
-  const num1 = Number(nilai1) || 0;
-  const num2 = Number(nilai2) || 0;
-  const hasil = num1 * num2;
+  const [hasil, setHasil] = useState('');
+
+  const add = () => {
+    return setHasil(String(parseInt(nilai1) + parseInt(nilai2)));
+  }
+
+  const substraction = () => {
+    return setHasil(String(parseInt(nilai1) - parseInt(nilai2)));
+  }
+
+  const multiply = () => {
+    return setHasil(String(parseInt(nilai1) * parseInt(nilai2)));
+  }
+
+  const division = () => {
+    return setHasil(String(parseInt(nilai1) / parseInt(nilai2)));
+  }
+    
 
   return (
     <View style={styles.container}>
@@ -27,7 +42,35 @@ export default function Index() {
         keyboardType="numeric"
       />
 
-      <Text style={styles.resultText}>Hasil Perkalian: {hasil}</Text>
+      <Button
+        onPress={() => division()}
+        title="/"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
+      
+      <Button
+        onPress={() => multiply()}
+        title="x"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
+      
+      <Button
+        onPress={() => substraction()}
+        title="-"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
+      
+      <Button
+        onPress={() => add()}
+        title="+"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
+
+      <Text style={styles.resultText}>Hasil: {hasil}</Text>
     </View>
   );
 }
